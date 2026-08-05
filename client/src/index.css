@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* ── Google Fonts ── */
+* { font-family: 'Outfit', sans-serif; }
+h1, h2, h3 { font-family: 'Syne', sans-serif; }
+
+/* ── Client Purple Palette ── */
+:root {
+  --c-bg:       #190019;
+  --c-bg2:      #2B124C;
+  --c-bg3:      #522B5B;
+  --c-accent:   #854F6C;
+  --c-light:    #DFB6B2;
+  --c-lightest: #FBE4D8;
+  --c-text:     #FBE4D8;
+  --c-muted:    #DFB6B2;
+  --c-border:   rgba(133, 79, 108, 0.35);
+  --c-glow:     rgba(82, 43, 91, 0.6);
+  --c-glass:    rgba(43, 18, 76, 0.45);
+}
+
+/* ── Freelancer Blue Palette ── */
+.fl-theme {
+  --f-bg:       #021024;
+  --f-bg2:      #052659;
+  --f-bg3:      #5483B3;
+  --f-accent:   #7DA0CA;
+  --f-light:    #C1E8FF;
+  --f-text:     #C1E8FF;
+  --f-muted:    #7DA0CA;
+  --f-border:   rgba(84, 131, 179, 0.35);
+  --f-glow:     rgba(5, 38, 89, 0.7);
+  --f-glass:    rgba(5, 38, 89, 0.45);
+}
+
+/* ── Shared utility classes ── */
+body { background: #0a0a0a; color: white; }
+
+.glass-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.glow-text {
+  text-shadow: 0 0 40px currentColor;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Smooth transitions globally */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(133,79,108,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(133,79,108,0.6); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-fadeInUp { animation: fadeInUp 0.6s ease forwards; }
+.animate-float    { animation: float 4s ease-in-out infinite; }
