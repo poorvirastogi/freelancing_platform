@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useWallet } from "../../context/WalletContext";
 import ClientSidebar from "../../components/ClientSidebar";
 import API from "../../utils/api";
+import { PageHeader, Card, StatCard, Field, Input, Textarea, Button } from "../../components/ui";
+import { Building2, FileText, Zap, Trophy, Wallet, Coins, Check } from "lucide-react";
 
 const ClientProfile = () => {
   const { user, account } = useWallet();
@@ -44,122 +46,82 @@ const ClientProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ background: "linear-gradient(135deg, #190019 0%, #2B124C 100%)" }}>
+    <div className="client-theme min-h-screen flex bg-bg text-foreground">
       <ClientSidebar />
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 overflow-auto">
+        <div className="max-w-4xl mx-auto px-6 lg:px-10 py-10">
 
-        <div className="mb-8">
-          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "rgba(133,79,108,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>Client Portal</p>
-          <h1 className="text-3xl font-black mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>My Profile</h1>
-          <p className="text-sm" style={{ color: "rgba(223,182,178,0.4)" }}>Manage your client profile and view activity summary</p>
-        </div>
+          <PageHeader
+            eyebrow="Client Portal"
+            title="My Profile"
+            description="Manage your client profile and view activity summary"
+          />
 
-        <div className="max-w-3xl flex flex-col gap-6">
+          <div className="flex flex-col gap-6 mt-8">
 
-          {/* Identity card */}
-          <div className="rounded-2xl p-6" style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
-            <div className="flex items-center gap-5">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, #522B5B, #854F6C)", boxShadow: "0 0 20px rgba(133,79,108,0.3)" }}>
-                🏢
-              </div>
-              <div>
-                <h2 className="text-xl font-bold mb-1" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>
-                  {user?.username || "Client"}
-                </h2>
-                <p className="text-xs font-mono mb-2" style={{ color: "rgba(223,182,178,0.4)" }}>
-                  {account && account !== "email-user" ? account : user?.email}
-                </p>
-                <span className="text-xs px-2 py-0.5 rounded-full"
-                  style={{ background: "rgba(133,79,108,0.2)", color: "#DFB6B2", border: "1px solid rgba(133,79,108,0.3)", fontFamily: "Space Grotesk, sans-serif" }}>
-                  🏢 Client
+            {/* Identity */}
+            <Card className="p-6">
+              <div className="flex items-center gap-5">
+                <span className="grid place-items-center h-16 w-16 rounded-[var(--radius-lg)] bg-accent text-accent-fg shrink-0">
+                  <Building2 size={30} strokeWidth={1.75} />
                 </span>
+                <div className="min-w-0">
+                  <h2 className="text-xl font-semibold text-foreground">{user?.username || "Client"}</h2>
+                  <p className="text-xs font-data text-muted mt-1 mb-2 truncate">
+                    {account && account !== "email-user" ? account : user?.email}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-accent-soft text-accent border border-[color:var(--accent)]/30">
+                    <Building2 size={12} /> Client
+                  </span>
+                </div>
               </div>
-            </div>
-          </div>
+            </Card>
 
-          {/* Activity stats */}
-          {stats && (
-            <div className="rounded-2xl p-6" style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
-              <h2 className="text-lg font-bold mb-5" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>📊 Activity Summary</h2>
-              <div className="grid grid-cols-3 gap-4 mb-4">
-                {[
-                  { label: "Jobs Posted", value: stats.total, icon: "📝" },
-                  { label: "Active Jobs", value: stats.active, icon: "⚡" },
-                  { label: "Completed", value: stats.completed, icon: "🏆" },
-                ].map(s => (
-                  <div key={s.label} className="rounded-xl p-4 text-center"
-                    style={{ background: "rgba(25,0,25,0.4)", border: "1px solid rgba(133,79,108,0.12)" }}>
-                    <div className="text-xl mb-1">{s.icon}</div>
-                    <div className="text-2xl font-black mb-0.5" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>{s.value}</div>
-                    <div className="text-xs" style={{ color: "rgba(223,182,178,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Total Budget Posted", value: `${stats.totalBudget} ETH`, icon: "��" },
-                  { label: "Total ETH Spent", value: `${stats.totalSpent} ETH`, icon: "💰" },
-                ].map(s => (
-                  <div key={s.label} className="rounded-xl p-4 flex items-center gap-3"
-                    style={{ background: "rgba(25,0,25,0.4)", border: "1px solid rgba(133,79,108,0.12)" }}>
-                    <span className="text-xl">{s.icon}</span>
-                    <div>
-                      <div className="font-bold" style={{ color: "#DFB6B2", fontFamily: "Syne, sans-serif" }}>{s.value}</div>
-                      <div className="text-xs" style={{ color: "rgba(223,182,178,0.4)", fontFamily: "Space Grotesk, sans-serif" }}>{s.label}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Edit form */}
-          <form onSubmit={handleSave} className="rounded-2xl p-6 flex flex-col gap-5"
-            style={{ background: "rgba(43,18,76,0.5)", border: "1px solid rgba(133,79,108,0.2)" }}>
-            <h2 className="text-lg font-bold" style={{ fontFamily: "Syne, sans-serif", color: "#DFB6B2" }}>✏️ Edit Profile</h2>
-
-            <div>
-              <label className="block text-sm mb-1.5" style={{ color: "rgba(223,182,178,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Name / Company</label>
-              <input value={form.username} onChange={e => setForm({...form, username: e.target.value})} placeholder="Your name or company"
-                className="w-full rounded-xl px-4 py-3 text-sm outline-none"
-                style={{ background: "rgba(25,0,25,0.6)", border: "1px solid rgba(133,79,108,0.2)", color: "#DFB6B2" }}
-                onFocus={e => e.target.style.border = "1px solid rgba(133,79,108,0.5)"}
-                onBlur={e => e.target.style.border = "1px solid rgba(133,79,108,0.2)"}/>
-            </div>
-
-            <div>
-              <label className="block text-sm mb-1.5" style={{ color: "rgba(223,182,178,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>About</label>
-              <textarea value={form.bio} onChange={e => setForm({...form, bio: e.target.value})}
-                placeholder="Tell freelancers about your company and projects..."
-                rows={4} className="w-full rounded-xl px-4 py-3 text-sm outline-none resize-none"
-                style={{ background: "rgba(25,0,25,0.6)", border: "1px solid rgba(133,79,108,0.2)", color: "#DFB6B2", lineHeight: "1.7" }}
-                onFocus={e => e.target.style.border = "1px solid rgba(133,79,108,0.5)"}
-                onBlur={e => e.target.style.border = "1px solid rgba(133,79,108,0.2)"}/>
-            </div>
-
-            <div>
-              <label className="block text-sm mb-1.5" style={{ color: "rgba(223,182,178,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Skills You Need</label>
-              <input value={form.skills} onChange={e => setForm({...form, skills: e.target.value})}
-                placeholder="React, Solidity, Node.js"
-                className="w-full rounded-xl px-4 py-3 text-sm outline-none"
-                style={{ background: "rgba(25,0,25,0.6)", border: "1px solid rgba(133,79,108,0.2)", color: "#DFB6B2" }}
-                onFocus={e => e.target.style.border = "1px solid rgba(133,79,108,0.5)"}
-                onBlur={e => e.target.style.border = "1px solid rgba(133,79,108,0.2)"}/>
-              <p className="text-xs mt-1" style={{ color: "rgba(133,79,108,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>Used for freelancer matching</p>
-            </div>
-
-            {saved && (
-              <div className="px-4 py-3 rounded-xl text-sm" style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", color: "#6ee7b7" }}>
-                ✅ Profile saved!
-              </div>
+            {/* Activity Summary */}
+            {stats && (
+              <Card className="p-6">
+                <h2 className="text-lg font-semibold text-foreground mb-5">Activity Summary</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+                  <StatCard label="Jobs Posted" value={stats.total} icon={FileText} />
+                  <StatCard label="Active Jobs" value={stats.active} icon={Zap} />
+                  <StatCard label="Completed" value={stats.completed} icon={Trophy} />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <StatCard label="Total Budget Posted" value={`${stats.totalBudget} ETH`} icon={Wallet} />
+                  <StatCard label="Total ETH Spent" value={`${stats.totalSpent} ETH`} icon={Coins} />
+                </div>
+              </Card>
             )}
 
-            <button type="submit" className="py-3 rounded-xl font-semibold transition-all"
-              style={{ background: "linear-gradient(135deg, #522B5B, #854F6C)", color: "#FBE4D8", fontFamily: "Space Grotesk, sans-serif" }}>
-              Save Profile
-            </button>
-          </form>
+            {/* Edit form */}
+            <Card className="p-6">
+              <h2 className="text-lg font-semibold text-foreground mb-5">Edit Profile</h2>
+              <form onSubmit={handleSave} className="flex flex-col gap-5">
+                <Field label="Name / Company">
+                  <Input value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} placeholder="Your name or company" />
+                </Field>
+
+                <Field label="About">
+                  <Textarea value={form.bio} onChange={e => setForm({ ...form, bio: e.target.value })}
+                    placeholder="Tell freelancers about your company and projects..." rows={4} />
+                </Field>
+
+                <Field label="Skills You Need" hint="Used for freelancer matching">
+                  <Input value={form.skills} onChange={e => setForm({ ...form, skills: e.target.value })} placeholder="React, Solidity, Node.js" />
+                </Field>
+
+                {saved && (
+                  <div role="status" className="px-4 py-3 rounded-[var(--radius-md)] text-sm flex items-center gap-2 bg-success-soft border border-[color:var(--success)]/30 text-success">
+                    <Check size={16} /> Profile saved!
+                  </div>
+                )}
+
+                <div>
+                  <Button type="submit">Save Profile</Button>
+                </div>
+              </form>
+            </Card>
+          </div>
         </div>
       </main>
     </div>
