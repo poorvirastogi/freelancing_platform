@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"freelancer":{"$numberInt":"1"},"skill":{"$numberInt":"1"}},"name":"freelancer_1_skill_1","unique":true}],"uuid":"4d2398a807484f00ab9f9ef33efcd51a","collectionName":"skillverifications","type":"collection"}

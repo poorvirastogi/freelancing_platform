@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"freelancer":{"$numberInt":"1"}},"name":"freelancer_1","unique":true}],"uuid":"e23af2ac5e094b5ea6943b1e78ca47a4","collectionName":"zkproofs","type":"collection"}
