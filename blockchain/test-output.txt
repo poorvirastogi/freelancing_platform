@@ -1,0 +1,213 @@
+◇ injected env (2) from .env // tip: ⌘ suppress logs { quiet: true }
+Compiled 1 Solidity file successfully (evm target: paris).
+
+
+  FreeLance3 - Full Evaluation Suite
+    ✔ TC01: Client can deposit funds into escrow
+    1) TC02: Client can release partial milestone payment
+    2) TC03: Client can release all remaining funds
+    ✔ TC04: Client can refund remaining balance
+    ✔ TC05: getStatus returns correct state after deposit
+    ✔ TC06: getBalance returns correct amount
+    3) TC07: Full lifecycle - deposit + partial + releaseAll
+    4) TC08 [ADVERSARIAL]: Non-client cannot deposit
+    5) TC09 [ADVERSARIAL]: Non-client cannot release funds
+    6) TC10 [ADVERSARIAL]: Cannot release before funding
+    ✔ TC11 [ADVERSARIAL]: Cannot deposit twice
+    7) TC12 [ADVERSARIAL]: Cannot refund after completion
+    8) TC13 [ADVERSARIAL]: Cannot release after refund
+    9) TC14 [ADVERSARIAL]: Invalid percentage 0 reverts
+    10) TC15 [ADVERSARIAL]: Invalid percentage >100 reverts
+
+  Lock
+    Deployment
+      11) Should set the right unlockTime
+      12) Should set the right owner
+      13) Should receive and store the funds to lock
+      14) Should fail if the unlockTime is not in the future
+    Withdrawals
+      Validations
+        15) Should revert with the right error if called too soon
+        16) Should revert with the right error if called from another account
+        17) Shouldn't fail if the unlockTime has arrived and the owner calls it
+      Events
+        18) Should emit an event on withdrawals
+      Transfers
+        19) Should transfer the funds to the owner
+
+
+  5 passing (208ms)
+  19 failing
+
+  1) FreeLance3 - Full Evaluation Suite
+       TC02: Client can release partial milestone payment:
+     TypeError: escrow.connect(...).releasePartial is not a function
+      at Context.<anonymous> (test/EscrowTest.js:29:45)
+
+  2) FreeLance3 - Full Evaluation Suite
+       TC03: Client can release all remaining funds:
+     TypeError: escrow.connect(...).releaseAll is not a function
+      at Context.<anonymous> (test/EscrowTest.js:37:45)
+
+  3) FreeLance3 - Full Evaluation Suite
+       TC07: Full lifecycle - deposit + partial + releaseAll:
+     TypeError: escrow.connect(...).releasePartial is not a function
+      at Context.<anonymous> (test/EscrowTest.js:67:34)
+
+  4) FreeLance3 - Full Evaluation Suite
+       TC08 [ADVERSARIAL]: Non-client cannot deposit:
+     AssertionError: Expected transaction to be reverted with reason 'Only client', but it reverted with reason 'Only client can call this'
+      at Context.<anonymous> (test/EscrowTest.js:78:5)
+
+  5) FreeLance3 - Full Evaluation Suite
+       TC09 [ADVERSARIAL]: Non-client cannot release funds:
+     TypeError: escrow.connect(...).releaseAll is not a function
+      at Context.<anonymous> (test/EscrowTest.js:86:32)
+
+  6) FreeLance3 - Full Evaluation Suite
+       TC10 [ADVERSARIAL]: Cannot release before funding:
+     TypeError: escrow.connect(...).releaseAll is not a function
+      at Context.<anonymous> (test/EscrowTest.js:92:30)
+
+  7) FreeLance3 - Full Evaluation Suite
+       TC12 [ADVERSARIAL]: Cannot refund after completion:
+     TypeError: escrow.connect(...).releaseAll is not a function
+      at Context.<anonymous> (test/EscrowTest.js:105:34)
+
+  8) FreeLance3 - Full Evaluation Suite
+       TC13 [ADVERSARIAL]: Cannot release after refund:
+     TypeError: escrow.connect(...).releaseAll is not a function
+      at Context.<anonymous> (test/EscrowTest.js:115:30)
+
+  9) FreeLance3 - Full Evaluation Suite
+       TC14 [ADVERSARIAL]: Invalid percentage 0 reverts:
+     TypeError: escrow.connect(...).releasePartial is not a function
+      at Context.<anonymous> (test/EscrowTest.js:122:30)
+
+  10) FreeLance3 - Full Evaluation Suite
+       TC15 [ADVERSARIAL]: Invalid percentage >100 reverts:
+     TypeError: escrow.connect(...).releasePartial is not a function
+      at Context.<anonymous> (test/EscrowTest.js:129:30)
+
+  11) Lock
+       Deployment
+         Should set the right unlockTime:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:30:36)
+
+  12) Lock
+       Deployment
+         Should set the right owner:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:36:31)
+
+  13) Lock
+       Deployment
+         Should receive and store the funds to lock:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:42:38)
+
+  14) Lock
+       Deployment
+         Should fail if the unlockTime is not in the future:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:54:20)
+
+  15) Lock
+       Withdrawals
+         Validations
+           Should revert with the right error if called too soon:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:64:26)
+
+  16) Lock
+       Withdrawals
+         Validations
+           Should revert with the right error if called from another account:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:72:52)
+
+  17) Lock
+       Withdrawals
+         Validations
+           Shouldn't fail if the unlockTime has arrived and the owner calls it:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:86:38)
+
+  18) Lock
+       Withdrawals
+         Events
+           Should emit an event on withdrawals:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:99:52)
+
+  19) Lock
+       Withdrawals
+         Transfers
+           Should transfer the funds to the owner:
+     HardhatError: HH700: Artifact for contract "Lock" not found. 
+      at Artifacts._handleWrongArtifactForContractName (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:721:11)
+      at Artifacts._getArtifactPathFromFiles (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:852:19)
+      at Artifacts._getArtifactPath (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:516:21)
+      at Artifacts.readArtifact (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/hardhat/src/internal/artifacts.ts:71:26)
+      at getContractFactory (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-ethers/src/internal/helpers.ts:120:22)
+      at deployOneYearLockFixture (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:22:18)
+      at loadFixture (/Users/poorvirastogi/freelance-platform/blockchain/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at Context.<anonymous> (/Users/poorvirastogi/freelance-platform/blockchain/test/Lock.js:113:59)
+
+
+
